@@ -8,6 +8,8 @@ df1 = requests.get('https://api.orcascan.com/sheets/f5xG1-gqdcueAPfe?datetimefor
 df2 = requests.get('https://api.orcascan.com/sheets/rt7SbnAGBhSmb7EU?datetimeformat=DD/MM/YYYY HH:mm:ss&timezone=+00:00:').content
 df3 = pd.read_csv(io.StringIO(df1.decode('utf-8')))
 df4 = pd.read_csv(io.StringIO(df2.decode('utf-8')))
+df3 = df3.sort_values(by='Name')
+df4 = df4.sort_values(by='Name')
 df5 = pd.concat([df3,df4["Scan_out"]], axis=1)
 if df5.index.name is None:
     df5 = df5[df5.index.notnull()]
