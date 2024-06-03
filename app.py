@@ -8,8 +8,8 @@ df1 = requests.get('https://api.orcascan.com/sheets/f5xG1-gqdcueAPfe?datetimefor
 df2 = requests.get('https://api.orcascan.com/sheets/rt7SbnAGBhSmb7EU?datetimeformat=DD/MM/YYYY HH:mm:ss&timezone=+00:00:').content
 df3 = pd.read_csv(io.StringIO(df1.decode('utf-8')))
 df4 = pd.read_csv(io.StringIO(df2.decode('utf-8')))
-df3 = df3.groupby(["Name"])[["Bulk_or_Indiv", "indiv_qty"]].agg(bulkindiv = ("Bulk_or_Indiv", lambda x:"Indiv"), qty = ("indiv_qty", "sum"))
-df4 = df4.groupby(["Name"])[["Bulk_or_Indiv", "indiv_qty"]].agg(bulkindiv = ("Bulk_or_Indiv", lambda x:"Indiv"), qty = ("indiv_qty", "sum"))
+df3 = df3.groupby(["Name"])
+df4 = df4.groupby(["Name"])
 df5_2 = df3.merge(df4, on=['Name', 'Bulk_or_Indiv'], suffixes=[None, '_copy'])
 df3 = df3.sort_values(by='Name', ascending=False)
 df4 = df4.sort_values(by='Name', ascending=False)
