@@ -10,6 +10,7 @@ df3 = pd.read_csv(io.StringIO(df1.decode('utf-8')))
 df4 = pd.read_csv(io.StringIO(df2.decode('utf-8')))
 
 df3 = df3.groupby(["Name"], ["Bulk_or_Indiv”]).agg(Multiplier = “Multiplier”, “max”), Scan_in = (“Scan_in”, “sum”))
+
 df4 = df4.groupby(["Name"], [“Bulk_or_Indiv”]).agg(Multiplier = “Multiplier”, “max”), Scan_out = (“Scan_out”, “sum”))
 
 df5_2 = df3.merge(df4, on=['Name', 'Bulk_or_Indiv'], suffixes=[None, '_copy'])
