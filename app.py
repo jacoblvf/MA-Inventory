@@ -12,6 +12,9 @@ df4 = pd.read_csv(io.StringIO(df2.decode('utf-8')))
 df3 = df3.groupby(["Name", "Bulk_or_Indiv"])[["Multiplier", "Scan_in"]].agg(Multiplier = ("Multiplier", "max"), Scan_in = ("Scan_in", "sum"))
 df4 = df4.groupby(["Name", "Bulk_or_Indiv"])[["Multiplier", "Scan_out"]].agg(Multiplier = ("Multiplier", "max"), Scan_out = ("Scan_out", "sum"))
 
+df3.reset_index()
+df4.reset_index()
+
 df5_2 = df3.merge(df4, on=['Name', 'Bulk_or_Indiv'], suffixes=[None, '_copy'])
 df3 = df3.sort_values(by='Name', ascending=False)
 df4 = df4.sort_values(by='Name', ascending=False)
