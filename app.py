@@ -17,9 +17,7 @@ df3 = df3.sort_values(by='Name', ascending=False)
 df4 = df4.sort_values(by='Name', ascending=False)
 df5 = pd.concat([df3,df4["Scan_out"]], axis=1)
 df5=df5_2
-df5 = df5[df5['Barcode'] != "0"]
-if df5.index.name is None:
-    df5 = df5[df5.index.notnull()]
+
 df5["scan_qty"] = df5["Scan_in"] - df5["Scan_out"]
 df5["indiv_qty"] = df5["scan_qty"]*df5["Multiplier"]
 df6 = df5.groupby(["Name"])[["Bulk_or_Indiv", "indiv_qty"]].agg(bulkindiv = ("Bulk_or_Indiv", lambda x:"Indiv"), qty = ("indiv_qty", "sum"))
