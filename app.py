@@ -17,6 +17,7 @@ df3 = df3.sort_values(by='Name', ascending=False)
 df4 = df4.sort_values(by='Name', ascending=False)
 df5 = pd.concat([df3,df4["Scan_out"]], axis=1)
 df5=df5_2
+
 if df5.index.name is None:
     df5 = df5[df5.index.notnull()]
 df5["scan_qty"] = df5["Scan_in"] - df5["Scan_out"]
