@@ -31,8 +31,8 @@ st.dataframe(df7, width=1000, height=600)
 
 df8 = requests.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vT0UBnLF6IU5M1U6y-FuYd98Ge9vJsaIUl-94r1YGmyCLueMaxdBxQikU2m6GUkqEHU4lR_2PXZvh4-/pubhtml?gid=592029174&single=true').content
 
-df9 = df7.merge(df8, on=['Name'], suffixes=[None, '_copy'])
-df9['Total Stock Price'] = df9['Product Quantity'] * df9['Cost']
+df9 = df6.merge(df8, on=['Name'], suffixes=[None, '_copy'])
+df9['Total Stock Price'] = df9['indiv_qty'] * df9['Cost']
 
 refresh_button = st.button("Refresh")
 if refresh_button:
