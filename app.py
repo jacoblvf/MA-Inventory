@@ -68,6 +68,7 @@ PASSCODE = "247123"
 
 # Streamlit app layout
 st.title("Passcode Protected CSV Download")
+st.markdown("<h1 style='font-size:30px;'>Title with Custom Font Size</h1>", unsafe_allow_html=True
 
 # Passcode input
 input_passcode = st.text_input("Enter passcode", type="password")
