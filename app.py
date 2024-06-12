@@ -84,7 +84,7 @@ if input_passcode:
         st.download_button(
             label="Download CSV",
             data=csv,
-            file_name='sample_data.csv',
+            file_name=str(date.today()) + "Stocklist.csv",
             mime='text/csv',
         )
     else:
