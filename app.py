@@ -3,8 +3,6 @@ import pandas as pd
 import io
 import streamlit as st
 from datetime import date
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 
 
 df1 = requests.get('https://api.orcascan.com/sheets/f5xG1-gqdcueAPfe?datetimeformat=DD/MM/YYYY HH:mm:ss&timezone=+00:00').content
@@ -30,6 +28,7 @@ df6 = df5.groupby(["Name"])[["Bulk_or_Indiv", "indiv_qty"]].agg(bulkindiv = ("Bu
 
 df7 = df6.rename(columns={'bulkindiv': 'Status', 'qty': 'Product Quantity'})
 df7['Product Quantity'] = df7['Product Quantity'].astype("int64")
+
 st.dataframe(df7, width=1000, height=600)
 
 
@@ -51,14 +50,19 @@ st.download_button(
     mime='text/csv',
 )
 
-df8 = requests.get('https://docs.google.com/spreadsheets/d/1Aovf3QVjKBj0AJwb9Zfojm2wA_r9TTPF9szRW8t22yw/export?format=csv’).content
+df8 = requests.get('https://docs.google.com/spreadsheets/d/1Aovf3QVjKBj0AJwb9Zfojm2wA_r9TTPF9szRW8t22yw/export?format=csv&gid=592029174').content
 
-df9 = df6.merge(df8, on=['Name'], suffixes=[None, '_copy'])
-df9['Total Stock Price'] = df9['indiv_qty'] * df9['Cost']
+df9 = pd.read_csv(io.StringIO(df8.decode('utf-8')))
+df10 = df6.merge(df9, on=['Name'], suffixes=[None, '_copy'])
+df10['qty'] = df10['qty'].astype("int64")
+df10['Cost'] = df10['Cost'].str.replace('$', '')
+
+df10['Total Stock Price'] = df10['qty'] * df10['Cost']
+
 
 CORRECT_PASSCODE = "247123"
 
-def convert_df_to_csv(df9):
+def convert_df_to_csv(df10):
     buffer = io.StringIO()
     df.to_csv(buffer, index=False)
     return buffer.getvalue()
@@ -75,4 +79,5 @@ if st.button("Download CSV"):
         st.success("Passcode is correct! You can download the CSV file now.")
         
         # Convert DataFrame to CSV
-        csv = convert_df_to_csv(df9)
+        csv = convert_df_to_csv(df10)
+
