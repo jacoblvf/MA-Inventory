@@ -59,24 +59,28 @@ df10['Cost'] = df10['Cost'].str.replace('$', '')
 df10['Total Stock Price'] = df10['qty'] * df10['Cost']
 
 
-CORRECT_PASSCODE = "247123"
+PASSCODE = "247123"
 
-def convert_df_to_csv(df10):
-    buffer = io.StringIO()
-    df.to_csv(buffer, index=False)
-    return buffer.getvalue()
+# Streamlit app layout
+st.title("Passcode Protected CSV Download")
 
-# Title of the app
-st.title("Password Protected Stock Price Download")
+# Passcode input
+input_passcode = st.text_input("Enter passcode", type="password")
 
-# Input field for the passcode
-passcode = st.text_input("Enter Passcode:", type="password")
-
-# Button to check passcode and enable download
-if st.button("Download CSV"):
-    if passcode == CORRECT_PASSCODE:
-        st.success("Passcode is correct! You can download the CSV file now.")
+# Verify passcode
+if input_passcode:
+    if input_passcode == PASSCODE:
+        st.success("Passcode correct! You can download the CSV file now.")
         
         # Convert DataFrame to CSV
         csv = convert_df_to_csv(df10)
-
+        
+        # Provide download link
+        st.download_button(
+            label="Download CSV",
+            data=csv,
+            file_name='sample_data.csv',
+            mime='text/csv',
+        )
+    else:
+        st.error("Incorrect passcode. Please try again.")
