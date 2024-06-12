@@ -61,7 +61,7 @@ df10['Total Stock Price'] = df10['qty'] * df10['Cost']
 
 def convert_df_to_csv(df10):
     csv_buffer = StringIO()
-    df.to_csv(csv_buffer, index=False)
+    df10.to_csv(csv_buffer, index=False)
     return csv_buffer.getvalue()
 
 PASSCODE = "247123"
