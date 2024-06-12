@@ -51,7 +51,7 @@ st.download_button(
     mime='text/csv',
 )
 
-df8 = requests.get('https://spreadsheets.google.com/feeds/cells/s/1Aovf3QVjKBj0AJwb9Zfojm2wA_r9TTPF9szRW8t22yw/1/public/full?alt=json’).content
+df8 = requests.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vT0UBnLF6IU5M1U6y-FuYd98Ge9vJsaIUl-94r1YGmyCLueMaxdBxQikU2m6GUkqEHU4lR_2PXZvh4-/pubhtml?gid=592029174&single=true’).content
 
 df9 = df6.merge(df8, on=['Name'], suffixes=[None, '_copy'])
 df9['Total Stock Price'] = df9['indiv_qty'] * df9['Cost']
@@ -76,4 +76,5 @@ if st.button("Download CSV"):
         
         # Convert DataFrame to CSV
         csv = convert_df_to_csv(df9)
+
 
