@@ -29,6 +29,11 @@ df7 = df6.rename(columns={'bulkindiv': 'Status', 'qty': 'Product Quantity'})
 df7['Product Quantity'] = df7['Product Quantity'].astype("int64")
 st.dataframe(df7, width=1000, height=600)
 
+df8 = requests.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vT0UBnLF6IU5M1U6y-FuYd98Ge9vJsaIUl-94r1YGmyCLueMaxdBxQikU2m6GUkqEHU4lR_2PXZvh4-/pubhtml?gid=592029174&single=true').content
+
+df9 = pd.merge(df7, df8, on='Name')
+df9['Total Stock Price'] = df9['Product Quantity'] * df9['Cost']
+
 refresh_button = st.button("Refresh")
 if refresh_button:
     st.experimental_rerun()
@@ -46,3 +51,24 @@ st.download_button(
     file_name=str(date.today()) + ".csv",
     mime='text/csv',
 )
+
+CORRECT_PASSCODE = "247123"
+
+def convert_df_to_csv(df9):
+    buffer = io.StringIO()
+    df.to_csv(buffer, index=False)
+    return buffer.getvalue()
+
+# Title of the app
+st.title("Password Protected Stock Price Download")
+
+# Input field for the passcode
+passcode = st.text_input("Enter Passcode:", type="password")
+
+# Button to check passcode and enable download
+if st.button("Download CSV"):
+    if passcode == CORRECT_PASSCODE:
+        st.success("Passcode is correct! You can download the CSV file now.")
+        
+        # Convert DataFrame to CSV
+        csv = convert_df_to_csv(df9)
