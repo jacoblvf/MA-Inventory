@@ -60,7 +60,7 @@ df10['Cost'] = df10['Cost'].astype(float)
 
 df10['Total Stock Price'] = df10['qty'] * df10['Cost']
 
-total_stock_price_sum = df['Total Stock Price'].sum()
+total_stock_price_sum = df10['Total Stock Price'].sum()
 
 new_row = pd.Series({
     'Name': 'Total',
