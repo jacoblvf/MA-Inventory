@@ -65,8 +65,6 @@ total_stock_price_sum = df['Total Stock Price'].sum()
 new_row = pd.Series({
     'Name': 'Total',
     'bulkindiv': 'Inventory Price',
-    'qty': total_stock_price_sum
-    'Cost': total_stock_price_sum
     'Total Stock Price': total_stock_price_sum
 })
 
