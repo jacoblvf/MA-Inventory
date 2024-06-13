@@ -64,9 +64,8 @@ total_stock_price_sum = df['Total Stock Price'].sum()
 new_row = pd.DataFrame({
     'Name': ['Total'],
     'bulkindiv': ['indiv'],
-    'qty': ['qty']
-    'Total Stock Price': [total_stock_price_sum]   
-    
+    'Total Stock Price': [total_stock_price_sum]
+
 df11 = pd.concat([df10, new_row], ignore_index=True)
 
 def convert_df_to_csv(df11):
