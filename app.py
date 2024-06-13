@@ -66,7 +66,7 @@ new_row = pd.DataFrame({
     'bulkindiv': ['indiv'],
     'Total Stock Price': [total_stock_price_sum]
 
-df10 = pd.concat([df10, new_row], ignore_index=True)
+df10 = pd.concat([df10, new_row], ignore_index=False)
 
 def convert_df_to_csv(df10):
     csv_buffer = StringIO()
