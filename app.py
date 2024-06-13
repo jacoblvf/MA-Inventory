@@ -56,6 +56,7 @@ df9 = pd.read_csv(io.StringIO(df8.decode('utf-8')))
 df10 = df6.merge(df9, on=['Name'], suffixes=[None, '_copy'])
 df10['qty'] = df10['qty'].astype("int64")
 df10['Cost'] = df10['Cost'].str.replace('$', '')
+df10['Cost'] = df10['Cost'].astype(float)
 
 df10['Total Stock Price'] = df10['qty'] * df10['Cost']
 
