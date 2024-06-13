@@ -67,7 +67,7 @@ def convert_df_to_csv(df10):
 PASSCODE = "247123"
 
 # Streamlit app layout
-st.title("Passcode Protected CSV Download")
+st.subheader("Passcode Protected CSV Download")
 
 
 # Passcode input
