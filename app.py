@@ -65,7 +65,6 @@ new_row = pd.DataFrame({
     'Name': ['Total'],
     'bulkindiv': ['indiv'],
     'qty': ['qty']
-    'Cost': ['0']
     'Total Stock Price': [total_stock_price_sum]   
     
 df11 = pd.concat([df10, new_row], ignore_index=True)
