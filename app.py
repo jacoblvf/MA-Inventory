@@ -70,7 +70,7 @@ new_row = pd.Series({
 
 df11 = pd.DataFrame(new_row)
 
-df10 = df10.append(new_row, ignore_index=True)
+df10 = df10.append(df11, ignore_index=True)
 
 
 def convert_df_to_csv(df10):
