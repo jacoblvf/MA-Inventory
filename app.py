@@ -68,7 +68,9 @@ new_row = pd.Series({
     'Total Stock Price': total_stock_price_sum
 })
 
-df10 = df10.concat(new_row, ignore_index=True)
+df11 = pd.DataFrame(new_row)
+
+df10 = df10.append(new_row, ignore_index=True)
 
 
 def convert_df_to_csv(df10):
