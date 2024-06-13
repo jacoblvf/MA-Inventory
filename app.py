@@ -66,9 +66,9 @@ new_row = pd.DataFrame({
     'bulkindiv': ['indiv'],
     'Total Stock Price': [total_stock_price_sum]
 
-df11 = pd.concat([df10, new_row], ignore_index=True)
+df10 = pd.concat([df10, new_row], ignore_index=True)
 
-def convert_df_to_csv(df11):
+def convert_df_to_csv(df10):
     csv_buffer = StringIO()
     df10.to_csv(csv_buffer, index=False)
     return csv_buffer.getvalue()
@@ -88,7 +88,7 @@ if input_passcode:
         st.success("Passcode correct! You can download the CSV file now.")
         
         # Convert DataFrame to CSV
-        csv = convert_df_to_csv(df11)
+        csv = convert_df_to_csv(df10)
         
         # Provide download link
         st.download_button(
