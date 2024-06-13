@@ -62,13 +62,15 @@ df10['Total Stock Price'] = df10['qty'] * df10['Cost']
 
 total_stock_price_sum = df['Total Stock Price'].sum()
 new_row = pd.DataFrame({
-    'Item': ['Total'],
-    'Inventory Price': ['Inventory Price'],
-    'Total Stock Price': [total_stock_price_sum]
+    'Name': ['Total'],
+    'bulkindiv': ['indiv'],
+    'qty': ['qty']
+    'Cost': ['Cost']
+    'Total Stock Price': [total_stock_price_sum]   
+    
+df11 = pd.concat([df10, new_row], ignore_index=True)
 
-df10 = pd.concat([df10, new_row], ignore_index=True)
-
-def convert_df_to_csv(df10):
+def convert_df_to_csv(df11):
     csv_buffer = StringIO()
     df10.to_csv(csv_buffer, index=False)
     return csv_buffer.getvalue()
@@ -88,7 +90,7 @@ if input_passcode:
         st.success("Passcode correct! You can download the CSV file now.")
         
         # Convert DataFrame to CSV
-        csv = convert_df_to_csv(df10)
+        csv = convert_df_to_csv(df11)
         
         # Provide download link
         st.download_button(
