@@ -60,14 +60,6 @@ df10['Cost'] = df10['Cost'].astype(float)
 
 df10['Total Stock Price'] = df10['qty'] * df10['Cost']
 
-total_stock_price_sum = df['Total Stock Price'].sum()
-new_row = pd.DataFrame({
-    'Name': ['Total'],
-    'bulkindiv': ['indiv'],
-    'Total Stock Price': [total_stock_price_sum]
-
-df10 = pd.concat([df10, new_row], ignore_index=False)
-
 def convert_df_to_csv(df10):
     csv_buffer = StringIO()
     df10.to_csv(csv_buffer, index=False)
